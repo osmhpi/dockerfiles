@@ -50,8 +50,8 @@ RUN curl -L -o ../ns-3.tar.bz2 https://www.nsnam.org/releases/ns-allinone-${NS3_
 	rm ../ns-3.tar.bz2
 
 # ---------------- NetAnim ----------------
-COPY netanim_python.patch ..
-RUN patch -p 1 -i ../netanim_python.patch && \
+COPY netanim_python_${NS3_VERSION}.patch ..
+RUN patch -p 1 -i ../netanim_python_${NS3_VERSION}.patch && \
 	cd netanim-* && \
 	qmake NetAnim.pro && \
 	make -j $(nproc)
