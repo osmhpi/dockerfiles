@@ -18,7 +18,7 @@ RUN apt-get update && \
 	python3-pip \
 	python3-setuptools \
 	python3-wheel \
-	qt5-default \
+	qt4-default \
 	&& \
 	apt-get autoremove -y && \
 	apt-get clean -y && \
@@ -41,11 +41,6 @@ RUN git clone --branch v0.2.0 --depth 1 https://github.com/CastXML/CastXML.git .
 
 # ---------------- download ----------------
 ENV NS3_VERSION=3.30
-
-# 3.29
-# ENV NS3_DOWNLOAD_SHA1=8e712a744a07318d0416dbf85137d11635a02e9d
-
-# 3.30
 ENV NS3_DOWNLOAD_SHA1=b4d40bb9777ee644bdba50e3a2e221da85715b4e
 
 WORKDIR /opt/ns-3
@@ -55,8 +50,8 @@ RUN curl -L -o ../ns-3.tar.bz2 https://www.nsnam.org/releases/ns-allinone-${NS3_
 	rm ../ns-3.tar.bz2
 
 # ---------------- NetAnim ----------------
-COPY netanim_python_${NS3_VERSION}.patch ..
-RUN patch -p 1 -i ../netanim_python_${NS3_VERSION}.patch && \
+COPY netanim_python.patch ..
+RUN patch -p 1 -i ../netanim_python.patch && \
 	cd netanim-* && \
 	qmake NetAnim.pro && \
 	make -j $(nproc)
@@ -79,7 +74,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends \
 	libpython3.7 \
-	libqt5printsupport5 \
+	libqtgui4 \
 	python3 \
 	&& \
 	apt-get autoremove -y && \
