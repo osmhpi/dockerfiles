@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+for tag in latest; do
+	docker tag "$IMAGE_NAME" "$DOCKER_REPO:$tag"
+	docker push "$DOCKER_REPO:$tag"
+done
