@@ -26,7 +26,6 @@ ARG SUMO_TAG=1.4.0
 ENV SUMO_HOME=/opt/sumo
 WORKDIR $SUMO_HOME
 RUN git clone --recursive -b "v$(echo $SUMO_TAG | sed 's/\./_/g')" --depth 1 https://github.com/eclipse/sumo . && \
-	test "$(git rev-parse HEAD)" = d7c9afb42e5de33dc51965b505e3dee8c8131d3b && \
 	mkdir build/cmake-build && \
 	cd build/cmake-build && \
 	cmake ../.. && \
