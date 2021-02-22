@@ -14,7 +14,7 @@ RUN apt-get update && \
 
 RUN python3 -c "from sys import version_info as v; pv = f'{v.major}.{v.minor}'; assert pv == '${PYTHON_VERSION}', f'Incompatible python version: {pv}'"
 
-ARG NS3_VERSION=3.30
+ARG NS3_VERSION=3.33
 RUN pv="$(echo "${PYTHON_VERSION}" | tr -d '.')" && \
 	pip3 install "https://github.com/osmhpi/python-wheels/releases/latest/download/ns-${NS3_VERSION}-cp${pv}-cp${pv}m-linux_x86_64.whl"
 
