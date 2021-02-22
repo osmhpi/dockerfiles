@@ -1,12 +1,10 @@
-FROM debian:10
-
 ARG PYTHON_VERSION=3.7
+FROM python:${PYTHON_VERSION}-buster
+ARG PYTHON_VERSION
 
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	libpython${PYTHON_VERSION} \
 	libqt5printsupport5 \
-	python3-pip \
 	&& \
 	apt-get autoremove -y && \
 	apt-get clean -y && \
